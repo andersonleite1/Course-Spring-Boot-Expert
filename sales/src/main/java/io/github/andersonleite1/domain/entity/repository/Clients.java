@@ -14,7 +14,10 @@ import java.util.List;
 public class Clients {
 
     private static String INSERT = "insert into cliente (nome) values (?)";
+    private static String SELECT_BY_NAME = "select * from cliente where nome like ?";
     private static String SELECT_ALL = "select * from cliente";
+    private static String UPDATE = "update cliente set nome = ? where id = ?";
+    private static String DELETE = "delete from cliente where id = ?";
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -26,14 +29,42 @@ public class Clients {
         return client;
     }
 
-    public List<Client> getAll() {
-        return jdbcTemplate.query(SELECT_ALL, new RowMapper<Client>() {
+    private static RowMapper<Client> getClientRowMapper() {
+        return new RowMapper<Client>() {
             @Override
             public Client mapRow(ResultSet resultSet, int i) throws SQLException {
                 Integer id = resultSet.getInt("id");
                 String name = resultSet.getString("nome");
                 return new Client(id, name);
             }
+        };
+    }
+
+    public List<Client> getByName(String name) {
+        return jdbcTemplate.query(SELECT_BY_NAME, new Object[]{
+            "%" + name + "%"
+        }, getClientRowMapper());
+    }
+
+    public List<Client> getAll() {
+        return jdbcTemplate.query(SELECT_ALL, getClientRowMapper());
+    }
+
+    public Client update(Client client) {
+        jdbcTemplate.update(UPDATE, new Object[]{
+                client.getName(),
+            client.getId()
+        });
+        return client;
+    }
+
+    public void delete(Client client) {
+        delete(client.getId());
+    }
+
+    public void delete(Integer id) {
+        jdbcTemplate.update(DELETE, new Object[]{
+            id
         });
     }
 }
