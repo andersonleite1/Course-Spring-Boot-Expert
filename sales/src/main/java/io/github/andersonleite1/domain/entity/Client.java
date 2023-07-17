@@ -1,7 +1,14 @@
 package io.github.andersonleite1.domain.entity;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "tb_clientes")
 public class Client {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+    @Column(name = "nome", length = 100)
     private String name;
 
     public Client() {
