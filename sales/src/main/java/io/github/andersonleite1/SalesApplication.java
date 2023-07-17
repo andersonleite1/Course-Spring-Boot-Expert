@@ -1,7 +1,7 @@
 package io.github.andersonleite1;
 
 import io.github.andersonleite1.domain.entity.Client;
-import io.github.andersonleite1.domain.entity.repository.Clients;
+import io.github.andersonleite1.domain.repository.Clients;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
