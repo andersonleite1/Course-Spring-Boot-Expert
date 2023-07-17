@@ -12,14 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class SalesApplication {
 
-    @Value("${application.name}")
-    private String applicationName;
-
-    @GetMapping("/hello")
-    public String hellorWorld() {
-        return applicationName;
-    };
-
     public static void main(String[] args) {
         SpringApplication.run(SalesApplication.class, args);
     }
