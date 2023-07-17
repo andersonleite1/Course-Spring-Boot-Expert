@@ -2,7 +2,15 @@ package io.github.andersonleite1.domain.entity;
 
 public class Client {
     private Integer id;
-    private String nome;
+    private String name;
+
+    public Client() {
+    }
+
+    public Client(Integer id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
     public Integer getId() {
         return id;
@@ -12,11 +20,19 @@ public class Client {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNome(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Client{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 }
