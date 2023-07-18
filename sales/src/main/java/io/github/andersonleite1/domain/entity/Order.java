@@ -11,15 +11,18 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Client client;
+
     @Column(name = "data_pedido")
     private LocalDate dateOrder;
-    @Column(length = 20, precision = 2)
+
+    @Column(name = "total", precision = 20, scale = 2)
     private BigDecimal total;
+
     @OneToMany(mappedBy = "order")
-    @JoinColumn(name = "item_id")
     private List<ItemOrder> items;
 
     public Integer getId() {
@@ -60,5 +63,14 @@ public class Order {
 
     public void setItems(List<ItemOrder> items) {
         this.items = items;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", dateOrder=" + dateOrder +
+                ", total=" + total +
+                '}';
     }
 }

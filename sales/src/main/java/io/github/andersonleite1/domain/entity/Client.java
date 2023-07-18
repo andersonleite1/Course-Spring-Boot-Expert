@@ -6,13 +6,15 @@ import java.util.Set;
 @Entity
 @Table(name = "tb_clientes")
 public class Client {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+
     @Column(name = "nome", length = 100)
     private String name;
-    @OneToMany(mappedBy = "client")
-    @JoinColumn(name = "perdido_id")
+
+    @OneToMany(mappedBy = "client", fetch = FetchType.LAZY)
     private Set<Order> orders;
 
     public Client() {
