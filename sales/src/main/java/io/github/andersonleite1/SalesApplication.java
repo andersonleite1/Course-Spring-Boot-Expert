@@ -22,25 +22,25 @@ public class SalesApplication {
             clients.save(new Client(null, "Jao"));
             clients.save(new Client(null, "Ana"));
 
-            List<Client> clientList = clients.getAll();
+            List<Client> clientList = clients.findAll();
             clientList.forEach(System.out::println);
 
             System.out.println("Atualizando Clientes");
             clientList.forEach(client -> {
                 client.setNome(client.getName() + " Atualizado");
-                clients.update(client);
+                clients.save(client);
             });
             clientList.forEach(System.out::println);
 
             System.out.println("Buscando Clientes com 'J'");
-            clients.getByName("J").forEach(System.out::println);
+            clients.findByNameLike("J").forEach(System.out::println);
 
             System.out.println("Deletando Clientes");
-            clients.getAll().forEach(client -> {
+            clients.findAll().forEach(client -> {
                 clients.delete(client);
             });
 
-            if(clients.getAll().isEmpty()) {
+            if(clients.findAll().isEmpty()) {
                 System.out.println("Nenhum cliente encontrado");
             } else {
                 clientList.forEach(System.out::println);
