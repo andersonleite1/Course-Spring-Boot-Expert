@@ -1,9 +1,20 @@
 package io.github.andersonleite1.domain.entity;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "tb_item_pedido")
 public class ItemOrder {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+    @ManyToOne
+    @JoinColumn(name = "pedido_id")
     private Order order;
+    @ManyToOne
+    @JoinColumn(name = "produto_id")
     private Product product;
+    @Column(name = "quantidade")
     private Integer quantity;
 
     public Integer getId() {
