@@ -1,7 +1,9 @@
 package io.github.andersonleite1;
 
 import io.github.andersonleite1.domain.entity.Client;
+import io.github.andersonleite1.domain.entity.Order;
 import io.github.andersonleite1.domain.repository.Clients;
+import io.github.andersonleite1.domain.repository.Orders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -9,42 +11,30 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 @SpringBootApplication
-@RestController
 public class SalesApplication {
 
     @Bean
-    public CommandLineRunner init(@Autowired Clients clients) {
+    public CommandLineRunner init(@Autowired Clients clients, @Autowired Orders orders) {
         return args -> {
             System.out.println("Salvando Clientes");
-            clients.save(new Client(null, "Jao"));
-            clients.save(new Client(null, "Ana"));
+            Client client1 = new Client(null, "Jao");
+            clients.save(client1);
 
-            List<Client> clientList = clients.findAll();
-            clientList.forEach(System.out::println);
+            Order order = new Order();
+            order.setClient(client1);
+            order.setDateOrder(LocalDate.now());
+            order.setTotal(BigDecimal.valueOf(100));
+            orders.save(order);
 
-            System.out.println("Atualizando Clientes");
-            clientList.forEach(client -> {
-                client.setNome(client.getName() + " Atualizado");
-                clients.save(client);
-            });
-            clientList.forEach(System.out::println);
-
-            System.out.println("Buscando Clientes com 'J'");
-            clients.findByNameLike("J").forEach(System.out::println);
-
-            System.out.println("Deletando Clientes");
-            clients.findAll().forEach(client -> {
-                clients.delete(client);
-            });
-
-            if(clients.findAll().isEmpty()) {
-                System.out.println("Nenhum cliente encontrado");
-            } else {
-                clientList.forEach(System.out::println);
-            }
+            Client c = clients.findClientFetchOrders(client1.getId());
+            System.out.println(c);
+            System.out.println(c.getOrders());
+//            orders.findByClient(client1).forEach(System.out::println);
         };
     }
 
