@@ -41,7 +41,7 @@ public class OrderServiceImpl implements OrderService {
 
         List<ItemOrder> itemOrders = converterItems(order, dto.getItems());
         ordersRepository.save(order);
-        itemsOrderRepository.saveAll(itemsOrder);
+        itemsOrderRepository.saveAll(itemOrders);
         return order;
     }
 
