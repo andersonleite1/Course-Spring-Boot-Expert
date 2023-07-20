@@ -1,5 +1,6 @@
 package io.github.andersonleite1.domain.entity;
 
+import io.github.andersonleite1.enums.OrderStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -31,5 +32,8 @@ public class Order {
 
     @OneToMany(mappedBy = "order")
     private List<ItemOrder> items;
+
+    @Enumerated(EnumType.STRING)
+    private OrderStatus status;
 
 }
