@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
@@ -28,9 +29,11 @@ public class Order {
     private LocalDate dateOrder;
 
     @Column(name = "total", precision = 20, scale = 2)
+    @NotEmpty(message = "Field total is required")
     private BigDecimal total;
 
     @OneToMany(mappedBy = "order")
+    @NotEmpty(message = "Field items is required")
     private List<ItemOrder> items;
 
     @Enumerated(EnumType.STRING)
