@@ -47,7 +47,7 @@ public class ClientController {
 
     @PutMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@PathVariable Integer id, @RequestBody Client client) {
+    public void update(@PathVariable @Valid Integer id, @RequestBody Client client) {
         clients.findById(id).map(clientCurrent -> {
             client.setId(clientCurrent.getId());
             clients.save(client);
