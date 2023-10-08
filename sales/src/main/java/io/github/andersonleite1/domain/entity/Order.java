@@ -29,11 +29,11 @@ public class Order {
     private LocalDate dateOrder;
 
     @Column(name = "total", precision = 20, scale = 2)
-    @NotEmpty(message = "Field total is required")
+    @NotEmpty(message = "{field.order-total.required}")
     private BigDecimal total;
 
     @OneToMany(mappedBy = "order")
-    @NotEmpty(message = "Field items is required")
+    @NotEmpty(message = "{field.order-items.required}}")
     private List<ItemOrder> items;
 
     @Enumerated(EnumType.STRING)

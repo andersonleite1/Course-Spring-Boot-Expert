@@ -1,8 +1,0 @@
-field.client-code.required=The field code client is required
-field.order-total.required=The field order total is required
-field.order-items.required=The field order items is required
-field.cpf.invalid=The field CPF is invalid
-field.cpf.required=The field CPF is required
-field.name.required=The field name is required
-field.description.required=The field description is required
-field.price.required=The field price is required

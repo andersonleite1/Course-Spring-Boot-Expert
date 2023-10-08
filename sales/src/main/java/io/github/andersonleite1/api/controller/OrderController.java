@@ -42,7 +42,7 @@ public class OrderController {
                 .getOrderFull(id)
                 .map(o -> convert(o))
                 .orElseThrow(() -> new ResponseStatusException(
-                        HttpStatus.NOT_FOUND, "Order not found"));
+                        HttpStatus.NOT_FOUND, "{data.order.not-found}"));
     }
 
     @PatchMapping("{id}")
