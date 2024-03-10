@@ -22,7 +22,7 @@ public class ProductController {
     @GetMapping("{id}")
     public Product getProductById(@PathVariable Integer id) {
         return products.findById(id).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND, "Client not found"));
+                new ResponseStatusException(HttpStatus.NOT_FOUND, "{data.client.not-found}"));
     }
 
     @GetMapping
@@ -49,7 +49,7 @@ public class ProductController {
             products.save(product);
             return productCurrent;
         }).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found"));
+                new ResponseStatusException(HttpStatus.NOT_FOUND, "{data.product.not-found}"));
     }
 
     @DeleteMapping("{id}")
@@ -59,6 +59,6 @@ public class ProductController {
             products.delete(product);
             return product;
         }).orElseThrow(() -> new ResponseStatusException(
-                HttpStatus.NOT_FOUND, "Product not found"));
+                HttpStatus.NOT_FOUND, "{data.product.not-found}"));
     }
 }

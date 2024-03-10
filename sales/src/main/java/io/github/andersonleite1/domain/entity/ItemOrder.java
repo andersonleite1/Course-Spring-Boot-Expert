@@ -1,5 +1,6 @@
 package io.github.andersonleite1.domain.entity;
 
+import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,6 +26,7 @@ public class ItemOrder {
     private Product product;
 
     @Column(name = "quantidade")
+    @NotNull(message = "{field.quantity.not-null}")
     private Integer quantity;
 
 }

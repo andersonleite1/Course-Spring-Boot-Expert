@@ -36,16 +36,18 @@ public class OrderServiceImpl implements OrderService {
         Integer clientId = dto.getClient();
         Client client = clientsRepository
                 .findById(clientId)
-                .orElseThrow(() -> new BusinessRuleException("Violation business rule"));
+                .orElseThrow(() -> new BusinessRuleException("Not valid client ID"));
 
         Order order = new Order();
         order.setTotal(dto.getTotal());
         order.setDateOrder(LocalDate.now());
         order.setClient(client);
+        order.setStatus(OrderStatus.REALIZADO);
 
         List<ItemOrder> itemOrders = converterItems(order, dto.getItems());
         ordersRepository.save(order);
         itemsOrderRepository.saveAll(itemOrders);
+        order.setItems(itemOrders);
         return order;
     }
 

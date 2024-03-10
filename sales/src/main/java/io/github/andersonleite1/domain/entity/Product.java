@@ -19,12 +19,12 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @NotEmpty(message = "Field description is required")
+    @NotEmpty(message = "{field.description.required}")
     @Column(name = "descricao")
     private String description;
 
     @Column(name = "preco_unitario")
-    @NotNull(message = "Field price is required")
+    @NotNull(message = "{field.price.required}")
     private BigDecimal price;
 
 }

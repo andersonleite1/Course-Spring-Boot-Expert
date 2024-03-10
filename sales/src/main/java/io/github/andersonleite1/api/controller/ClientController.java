@@ -24,7 +24,7 @@ public class ClientController {
     @GetMapping("{id}")
     public Client getClientById(@PathVariable Integer id) {
         return clients.findById(id).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND, "Client not found"));
+                new ResponseStatusException(HttpStatus.NOT_FOUND, "{data.client.not-found}"));
     }
 
     @GetMapping
@@ -53,7 +53,7 @@ public class ClientController {
             clients.save(client);
             return clientCurrent;
         }).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND, "Client not found"));
+                new ResponseStatusException(HttpStatus.NOT_FOUND, "{data.client.not-found}"));
     }
 
     @DeleteMapping("{id}")
@@ -64,6 +64,6 @@ public class ClientController {
                     return client;
                 })
                 .orElseThrow(() -> new ResponseStatusException(
-                        HttpStatus.NOT_FOUND, "Client not found"));
+                        HttpStatus.NOT_FOUND, "{data.client.not-found}"));
     }
 }
